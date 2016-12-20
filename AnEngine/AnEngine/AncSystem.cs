@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,46 +13,48 @@ namespace AnEngine
 {
     public class AncSystem : Game
     {
-        public GraphicsDeviceManager graphics;
-        public SpriteBatch spriteBatch;
-        public AncSceneController SController;
+        private GraphicsDeviceManager Graphics;
+        public AncSceneController Controller;
+        
 
         public AncSystem(int height, int width, bool fullscreen, bool multisampling)
         {
-            graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferHeight = height;
-            graphics.PreferredBackBufferWidth = width;
-            graphics.IsFullScreen = fullscreen;
-            graphics.PreferMultiSampling = multisampling;
-            graphics.ApplyChanges();
+            Graphics.PreferredBackBufferHeight = height;
+            Graphics.PreferredBackBufferWidth = width;
+            Graphics.IsFullScreen = fullscreen;
+            Graphics.PreferMultiSampling = multisampling;
 
-            SController = new AncSceneController();
+            Controller = new AncSceneController(this);
+        }
+
+        public void Start()
+        {
+
         }
 
         protected override void Initialize()
         {
-            base.Initialize();
-        }
 
-        protected override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-        }
-
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
         }
 
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            base.LoadContent();
 
-            
         }
 
+        protected override void Update(GameTime gameTime)
+        {
 
+        }
 
+        protected override void Draw(GameTime gameTime)
+        {
+
+        }
+
+        protected override void UnloadContent()
+        {
+
+        }
     }
 }

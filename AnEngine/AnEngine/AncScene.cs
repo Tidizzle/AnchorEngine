@@ -3,39 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
+
 
 namespace AnEngine
 {
-    public abstract class AncScene
+    public abstract class AncScene : IDisposable
     {
-        private string sceneName;
-        public string SceneName
-        {
-            get
-            {
-                return sceneName;
-            }
+        public string sceneName;
+        public Dictionary<string, AncObject> objectList;
 
-            set
-            {
-                sceneName = value;
-            }
+        protected AncScene(string name)
+        {
+            sceneName = name;
         }
 
-        public  List<AncObject> ObjList;
+        public abstract void Start();
+        public abstract void Load();
+        public abstract void Update();
+        public abstract void Draw();
 
-
-        public AncScene(string Scenename)
-        {
-            SceneName = Scenename;
-        }
-
-        public virtual void UpdateObjs()
-        {
-            foreach(var obj in ObjList)
-            {
-                
-            }
-        }
+        public abstract void Dispose();
     }
 }

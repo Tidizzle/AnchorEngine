@@ -1,43 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using OpenTK.Graphics.OpenGL;
 
 namespace AnEngine
 {
-    public class AncApplication : Game, IDisposable
+    public class AncApplication
     {
-        AncSystem system;
+        private AncSystem SYSTEM;
 
-        public AncApplication(int height = 800, int width = 1000, bool fullscreen = false, bool multisampling = false )
+        public AncApplication(int height, int width, bool fullscreen, bool multisampling)
         {
-            system = new AncSystem(height, width, fullscreen, multisampling);
+             SYSTEM = new AncSystem(height, width, fullscreen, multisampling);
         }
 
-        public void Start(params AncScene[] scenes)
+        public void Start(params AncScene[] scenes )
         {
             if (scenes.Length > 0)
             {
-                foreach (var scene in scenes)
+                foreach (AncScene scene in scenes)
                 {
-                    system.SController.Add(scene);
+                    SYSTEM.Controller.Add(scene, scene.sceneName);
                 }
             }
             else
             {
-                var scene = new DefaultScene("default");
-                system.SController.Add(scene);
+                //create default scene!!!
             }
-
-            system.Run();
-        }
-
-        public new void Dispose()
-        {
-            throw new NotImplementedException();
         }
     }
 }

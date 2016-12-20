@@ -53,13 +53,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AncApplication.cs" />
-    <Compile Include="Anchor.cs" />
-    <Compile Include="AncObject.cs" />
     <Compile Include="AncScene.cs" />
     <Compile Include="AncSceneController.cs" />
-    <Compile Include="AncSprite.cs" />
     <Compile Include="AncSystem.cs" />
-    <Compile Include="DefaultScene.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

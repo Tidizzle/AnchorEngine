@@ -4,63 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 
 namespace AnEngine
 {
     public class AncSceneController
     {
-        public Dictionary<string, AncScene> Scenelist;
-        public AncScene currentScene;
+        private Dictionary<string, AncScene> sceneList;
+        private AncSystem SYSTEM;
+        private AncScene currentScene;
 
-        public AncSceneController()
+        public AncSceneController(AncSystem system)
         {
-            Scenelist = new Dictionary<string, AncScene>();
-            currentScene = Scenelist.First().Value;
+            SYSTEM = system;
+            sceneList = new Dictionary<string, AncScene>();
         }
 
-
-        public void Add(AncScene scene)
+        public void Add(AncScene scene, string sceneName)
         {
-            Scenelist.Add(scene.SceneName, scene);
+            sceneList?.Add(sceneName, scene);
         }
 
-        public void Start(GraphicsDevice graphicsDevice)
+        public void Start()
         {
-            SpriteBatch spriteBatch = new SpriteBatch(graphicsDevice);
-            load(currentScene, spriteBatch);
+            currentScene = sceneList.First().Value;
+            currentScene.Start();
         }
-
-        public void load(AncScene scene, SpriteBatch spriteBatch)
-        {
-            for(int i = 0; i < scene.ObjList.Count; i++)
-            {
-                for(int j = 0; j < scene.ObjList[i].SpriteList.Count; j++)
-                {
-                    int x = (int)scene.ObjList[i].SpriteList[j].location.X;
-                    int y = (int)scene.ObjList[i].SpriteList[j].location.Y;
-                    int width = scene.ObjList[i].SpriteList[j].texture.Width;
-                    int height = scene.ObjList[i].SpriteList[j].texture.Height;
-
-                    spriteBatch.Begin();
-                    spriteBatch.Draw(scene.ObjList[i].SpriteList[j].texture, new Rectangle(x,y,width,height), Color.White );
-                    spriteBatch.End();
-                }
-            }
-        }
-
-
-        public void Update(AncScene currentScene)
-        {
-            foreach(var obj in currentScene.ObjList)
-            {
-                
-            }
-        }
-
-
-
 
     }
 }
