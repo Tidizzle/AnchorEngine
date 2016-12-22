@@ -52,10 +52,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AncAnimatedSprite.cs" />
     <Compile Include="AncApplication.cs" />
+    <Compile Include="AncInput.cs" />
+    <Compile Include="AncObject.cs" />
     <Compile Include="AncScene.cs" />
     <Compile Include="AncSceneController.cs" />
+    <Compile Include="AncSound.cs" />
+    <Compile Include="AncSprite.cs" />
     <Compile Include="AncSystem.cs" />
+    <Compile Include="AncType.cs" />
+    <Compile Include="Properties\AncBackground.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

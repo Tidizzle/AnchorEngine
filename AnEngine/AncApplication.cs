@@ -1,35 +1,41 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using OpenTK.Graphics.OpenGL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-using OpenTK.Graphics.OpenGL;
 
 namespace AnEngine
 {
     public class AncApplication
     {
-        private AncSystem SYSTEM;
+        public AncSystem system;
 
         public AncApplication(int height, int width, bool fullscreen, bool multisampling)
         {
-             SYSTEM = new AncSystem(height, width, fullscreen, multisampling);
+            var sys = new AncSystem(height, width, fullscreen, multisampling);
+            system = sys;
         }
 
-        public void Start(params AncScene[] scenes )
+        public void Start(SpriteBatch spriteBatch, params AncScene[] scenes)
         {
             if (scenes.Length > 0)
             {
                 foreach (AncScene scene in scenes)
                 {
-                    SYSTEM.Controller.Add(scene, scene.sceneName);
+                    system.Controller.Add(scene, scene.sceneName);
+                    scene.system = system;
                 }
             }
             else
             {
                 //create default scene!!!
             }
+
+            system.Run();
         }
     }
 }
