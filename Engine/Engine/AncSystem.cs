@@ -6,8 +6,10 @@ namespace Engine
 {
     public class AncSystem : Game
     {
-        private GraphicsDeviceManager Graphics;
+        public GraphicsDeviceManager Graphics;
         public AncSceneController Controller;
+        public SpriteBatch SpriteBatch;
+        public SamplerState state = SamplerState.PointClamp;
 
         public AncSystem(int width, int height, bool fullscreen, bool multisampling)
         {
@@ -19,11 +21,14 @@ namespace Engine
                 PreferMultiSampling = multisampling
             };
 
-            Controller = new AncSceneController(this);
+            Controller = new AncSceneController();
         }
 
         protected override void LoadContent()
         {
+
+            Content.RootDirectory = "Content/";
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
             Controller.Instantiate();
             Controller.LoadContent();
         }
@@ -35,7 +40,9 @@ namespace Engine
 
         protected override void Draw(GameTime gameTime)
         {
+            SpriteBatch.Begin(samplerState: state);
             Controller.Draw(gameTime);
+            SpriteBatch.End();
         }
 
         protected override void Dispose(bool disposing)

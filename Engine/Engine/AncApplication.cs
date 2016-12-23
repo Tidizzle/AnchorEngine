@@ -13,6 +13,8 @@ namespace Engine
 
         public void Start(params AncScene[] scenes)
         {
+            SYSTEM.Controller.SYSTEM = SYSTEM;
+
             if (scenes.Length > 0)
             {
                 foreach (var scene in scenes)
