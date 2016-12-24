@@ -1,9 +1,10 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using System;
+using Microsoft.Xna.Framework.Graphics;
 using OpenTK;
 
 namespace Engine
  {
-     public class AncSprite : AncType
+     public class AncSprite : IDisposable
      {
          public AncSprite(Anchor parent)
          {
@@ -14,5 +15,10 @@ namespace Engine
          public Texture2D Texture;
          public string fileLocation = "";
          public Vector2 currentLoc;
+
+         public void Dispose()
+         {
+             Texture?.Dispose();
+         }
      }
  }

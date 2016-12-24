@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Serialization.Configuration;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Engine
 {
@@ -42,13 +42,39 @@ namespace Engine
 
         public void Draw(GameTime gameTime)
         {
-            SYSTEM.GraphicsDevice.Clear(Color.CornflowerBlue);
+            SYSTEM.GraphicsDevice.Clear(Color.Green);
             currentScene.Draw(gameTime);
         }
 
         public void Dispose()
         {
-            //currentScene.Dispose();
+            currentScene.Dispose();
         }
+
+        public void DisposeAll()
+        {
+            foreach (var scene in sceneList.Values)
+            {
+                scene.Dispose();
+            }
+        }
+
+        #region Scene Modification
+
+        internal AncScene curr;
+
+        public void switchScene(String SceneName, SpriteBatch batch)
+        {
+            curr = new DefaultScene("SafeDefault");
+            if (sceneList.ContainsKey(SceneName))
+            {
+                this.curr = sceneList[SceneName];
+            }
+
+            Console.WriteLine(curr.Name);
+            currentScene = curr;
+        }
+
+        #endregion
     }
 }

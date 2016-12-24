@@ -48,14 +48,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AncAnimatedSprite.cs" />
     <Compile Include="AncApplication.cs" />
     <Compile Include="Anchor.cs" />
+    <Compile Include="AncInput.cs" />
     <Compile Include="AncObject.cs" />
     <Compile Include="AncScene.cs" />
     <Compile Include="AncSceneController.cs" />
     <Compile Include="AncSprite.cs" />
     <Compile Include="AncSystem.cs" />
+    <Compile Include="DefaultScene.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RedBackground.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

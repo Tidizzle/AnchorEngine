@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using Engine;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using Test;
 
-namespace Test
+namespace Engine
 {
-    public class scene1 : AncScene
+    public class DefaultScene : AncScene
     {
-        public scene1(string Name) : base(Name)
+
+        public DefaultScene(string Name) : base(Name)
         {
             base.Name = Name;
         }
@@ -18,6 +20,7 @@ namespace Test
             {
                 obj.LoadContent();
             }
+
         }
 
         public override void Update(GameTime gameTime)
@@ -39,23 +42,9 @@ namespace Test
         public override void Instantiate(AncSystem sys)
         {
             objectList = new Dictionary<string, Anchor>();
-
-
-            var bg = new Grassbg("Grass");
+            var bg = new RedBackground("Red");
             bg.Instantiate(sys);
-            addObj(bg);
-
-            var peter = new PeterAni("Peter");
-            peter.Instantiate(sys);
-            addObj(peter);
-
-            //var peter = new Peter("Peter");
-            //peter.Instantiate(sys);
-            //addObj(peter);
-
-            //var sticky = new sticky("Sticky");
-            //sticky.Instantiate(sys);
-            //objectList.Add(sticky.Name, sticky);
+            objectList.Add(bg.Name, bg);
         }
     }
 }

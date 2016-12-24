@@ -20,9 +20,17 @@ namespace Engine
         public abstract void Draw(GameTime gameTime);
         public abstract void Instantiate(AncSystem sys);
 
-        public void Dispose()
+        public virtual void addObj(Anchor anc)
         {
+            objectList.Add(anc.Name, anc);
+        }
 
+        public virtual void  Dispose()
+        {
+            foreach (var obj in objectList.Values)
+            {
+                obj.Dispose();
+            }
         }
 
     }

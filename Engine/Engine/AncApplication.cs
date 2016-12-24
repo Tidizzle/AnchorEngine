@@ -27,6 +27,7 @@ namespace Engine
 
         public void Dispose()
         {
+            SYSTEM.Dispose();
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Engine;
+﻿using Engine;
 
 namespace Test
 {
@@ -8,9 +6,9 @@ namespace Test
     {
         public static void Main(string[] args)
         {
-            using (var t = new AncApplication(1680, 1050, false, false))
+            using (var t = new AncApplication(1000, 800, false, false))
             {
-                t.Start(new scene1("Scene1"));
+                t.Start(new scene1("Scene1"), new DefaultScene("Default"));
             }
         }
     }
