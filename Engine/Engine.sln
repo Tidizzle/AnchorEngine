@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine", "Engine\Engine.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{A7B6848B-0EF0-4F53-B264-877DBC6CC801}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnchorMapParser", "..\Map Parse\AnchorMapParser\AnchorMapParser\AnchorMapParser.csproj", "{5FAFB0BD-F7D1-48E6-884B-CD427A6FDB02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anchor Color Palette Creator", "..\Palette Creator\Anchor Color Palette Creator\Anchor Color Palette Creator\Anchor Color Palette Creator.csproj", "{5ABB9DCB-D0E8-4A94-B434-1BBE609D9D3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnchorMapLib", "..\MapLib\AnchorMapLib\AnchorMapLib\AnchorMapLib.csproj", "{0D134E21-5234-4747-BFF5-D81929DB0788}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +27,18 @@ Global
 		{A7B6848B-0EF0-4F53-B264-877DBC6CC801}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7B6848B-0EF0-4F53-B264-877DBC6CC801}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7B6848B-0EF0-4F53-B264-877DBC6CC801}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FAFB0BD-F7D1-48E6-884B-CD427A6FDB02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FAFB0BD-F7D1-48E6-884B-CD427A6FDB02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FAFB0BD-F7D1-48E6-884B-CD427A6FDB02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FAFB0BD-F7D1-48E6-884B-CD427A6FDB02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ABB9DCB-D0E8-4A94-B434-1BBE609D9D3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ABB9DCB-D0E8-4A94-B434-1BBE609D9D3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ABB9DCB-D0E8-4A94-B434-1BBE609D9D3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ABB9DCB-D0E8-4A94-B434-1BBE609D9D3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D134E21-5234-4747-BFF5-D81929DB0788}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D134E21-5234-4747-BFF5-D81929DB0788}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D134E21-5234-4747-BFF5-D81929DB0788}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D134E21-5234-4747-BFF5-D81929DB0788}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 
@@ -10,6 +11,7 @@ namespace Engine
         public AncSceneController Controller;
         public SpriteBatch SpriteBatch;
         public SamplerState state = SamplerState.PointClamp;
+        public Matrix TransformMatrix;
 
         public AncSystem(int width, int height, bool fullscreen, bool multisampling)
         {
@@ -38,9 +40,15 @@ namespace Engine
             Controller.Update(gameTime);
         }
 
+
         protected override void Draw(GameTime gameTime)
         {
-            SpriteBatch.Begin(samplerState: state);
+
+		    var camera = Controller.currentScene.objectList["Camera"].GlobalCamera;
+
+	        var viewMatrix = camera.GetViewMatrix();
+
+            SpriteBatch.Begin(samplerState: state, transformMatrix: viewMatrix);
             Controller.Draw(gameTime);
             SpriteBatch.End();
         }

@@ -32,5 +32,21 @@ namespace Engine
          {
              return KeyboardState.IsKeyDown(K) && PreviousKeyboardState.IsKeyDown(K);
          }
+
+         public static bool MouseLeftDown()
+         {
+             return MouseState.LeftButton == ButtonState.Pressed && PreviousMouseState.LeftButton == ButtonState.Released;
+         }
+
+         public static bool MouseLeftHeld()
+         {
+             return MouseState.LeftButton == ButtonState.Pressed;
+         }
+
+         public static bool MouseLeftUp(Keys k)
+         {
+             return MouseState.LeftButton == ButtonState.Released && PreviousMouseState.LeftButton == ButtonState.Pressed;
+         }
+
      }
  }

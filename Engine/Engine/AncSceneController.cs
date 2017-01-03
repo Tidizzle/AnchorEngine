@@ -9,8 +9,8 @@ namespace Engine
     public class AncSceneController : IDisposable
     {
         internal AncSystem SYSTEM;
-        private Dictionary<string, AncScene> sceneList = new Dictionary<string, AncScene>();
-        private AncScene currentScene;
+        public  Dictionary<string, AncScene> sceneList = new Dictionary<string, AncScene>();
+        public AncScene currentScene;
 
         public void Add(AncScene scene)
         {
@@ -19,12 +19,15 @@ namespace Engine
 
         public void Instantiate()
         {
+            currentScene = sceneList.FirstOrDefault().Value;
+
             foreach (var scene in sceneList.Values)
             {
+                scene.GraphicsDevice = SYSTEM.GraphicsDevice;
                 scene.Instantiate(SYSTEM);
             }
 
-            currentScene = sceneList.FirstOrDefault().Value;
+
         }
 
         public void LoadContent()
@@ -63,7 +66,7 @@ namespace Engine
 
         internal AncScene curr;
 
-        public void switchScene(String SceneName, SpriteBatch batch)
+        public void switchScene(String SceneName)
         {
             curr = new DefaultScene("SafeDefault");
             if (sceneList.ContainsKey(SceneName))

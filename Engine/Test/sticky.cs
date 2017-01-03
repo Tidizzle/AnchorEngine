@@ -31,21 +31,11 @@ namespace Test
 
         public override void Update(GameTime gameTime)
         {
-            scale.X += 0.01f;
-            scale.Y += 0.01f;
-
-
-            location += new Vector2(-.1f,0);
 
             var state = Keyboard.GetState();
             if (state.IsKeyDown(Keys.Escape))
             {
                 SYSTEM.Exit();
-            }
-
-            if (state.IsKeyDown(Keys.Space))
-            {
-                SYSTEM.Controller.switchScene("Default",SYSTEM.SpriteBatch);
             }
         }
 
@@ -56,11 +46,12 @@ namespace Test
             SYSTEM.SpriteBatch.Draw(Sprite.Texture,location, color: Color.White, scale: scale, origin: origin);
         }
 
-        public override void Instantiate(AncSystem sys)
+
+        public override void Instantiate(AncSystem sys, AncScene scene)
         {
             SYSTEM = sys;
             Sprite = new AncSprite(this);
-            Sprite.fileLocation = "stickdude2";
+            Sprite.fileLocation = "stickdude";
             AnchorSprite = Sprite;
         }
     }

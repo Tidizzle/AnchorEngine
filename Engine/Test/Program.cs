@@ -6,7 +6,7 @@ namespace Test
     {
         public static void Main(string[] args)
         {
-            using (var t = new AncApplication(1000, 800, false, false))
+            using (var t = new AncApplication(1500, 900, false, false))
             {
                 t.Start(new scene1("Scene1"), new DefaultScene("Default"));
             }

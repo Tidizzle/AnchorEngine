@@ -43,7 +43,7 @@ namespace Engine
         {
             objectList = new Dictionary<string, Anchor>();
             var bg = new RedBackground("Red");
-            bg.Instantiate(sys);
+            bg.Instantiate(sys, this);
             objectList.Add(bg.Name, bg);
         }
     }

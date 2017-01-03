@@ -38,7 +38,8 @@ namespace Test
             SYSTEM.SpriteBatch.Draw(texture, origin, Color.White);
         }
 
-        public override void Instantiate(AncSystem sys)
+
+        public override void Instantiate(AncSystem sys, AncScene scene)
         {
             SYSTEM = sys;
             texture = new Texture2D(SYSTEM.GraphicsDevice, 500,500);

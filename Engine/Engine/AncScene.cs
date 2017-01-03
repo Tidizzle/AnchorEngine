@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Engine
 {
@@ -9,6 +10,7 @@ namespace Engine
         public AncSystem SYSTEM;
         public Dictionary<string, Anchor> objectList;
         public string Name;
+        public GraphicsDevice GraphicsDevice { get; internal set; }
 
         protected AncScene(string Name)
         {

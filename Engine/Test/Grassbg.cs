@@ -26,8 +26,9 @@ namespace Test
 
         public override void Draw(GameTime gameTime)
         {
-            int x = SYSTEM.Graphics.PreferredBackBufferWidth;
-            int y = SYSTEM.Graphics.PreferredBackBufferHeight;
+
+            int x = 5000;
+            int y = 5000;
             int width = Sprite.Texture.Width;
             int height = Sprite.Texture.Height;
             int columns = x / width + 1;
@@ -49,7 +50,8 @@ namespace Test
 
         }
 
-        public override void Instantiate(AncSystem sys)
+
+        public override void Instantiate(AncSystem sys, AncScene scene)
         {
             SYSTEM = sys;
             Sprite = new AncSprite(this);

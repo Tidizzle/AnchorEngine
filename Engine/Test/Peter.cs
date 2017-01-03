@@ -56,12 +56,14 @@ namespace Test
             SYSTEM.SpriteBatch.Draw(Sprite.Texture, location, color: Color.White, scale: Scale, origin: Origin, effects: effect);
         }
 
-        public override void Instantiate(AncSystem sys)
+
+        public override void Instantiate(AncSystem sys, AncScene scene)
         {
             SYSTEM = sys;
             Sprite = new AncSprite(this);
             Sprite.fileLocation = "peter";
             AnchorSprite = Sprite;
+
         }
     }
 }

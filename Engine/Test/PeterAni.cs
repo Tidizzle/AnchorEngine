@@ -1,7 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Security;
 using Engine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,75 +10,157 @@ namespace Test
     public class PeterAni : Anchor
     {
         private AncAnimatedSprite Sprite;
-        private readonly Vector2 Scale = new Vector2(10f);
-        private Vector2 location;
-        private Vector2 origin;
-        private SpriteEffects effect;
+        //private Vector2 origin;
+        private int elapsedupdate;
+        private readonly int frametime = 100;
+
+        private int starting;
+        private int ending;
 
         public PeterAni(string name)
         {
             Name = name;
+
+
         }
 
         public override void LoadContent()
         {
-            Sprite.Texture = SYSTEM.Content.Load<Texture2D>(Sprite.FileLocation);
+
+	        Sprite.Texture = SYSTEM.Content.Load<Texture2D>(Sprite.FileLocation);
             AnchorAniSprite = Sprite;
 
-            location.X = SYSTEM.GraphicsDevice.Viewport.Width / 2f;
-            location.Y = SYSTEM.GraphicsDevice.Viewport.Height / 2f;
-            origin.X = Sprite.Texture.Width / 2f;
-            origin.Y = Sprite.Texture.Height / 2f;
+	        GlobalWidth = Sprite.Texture.Width / Sprite.columns;
+	        GlobalHeight = Sprite.Texture.Height;
+	        Scale = new Vector2(10f);
+
+	        Location.X = Parent.GraphicsDevice.Viewport.Width / 2 - (int) (GlobalWidth / 2f * Scale.X);
+	        Location.Y = SYSTEM.GraphicsDevice.Viewport.Height / 2 -  (int) (GlobalHeight / 2f * Scale.Y);
         }
 
         public override void Update(GameTime gameTime)
         {
-            Sprite.Frame++;
-            if (Sprite.Frame > Sprite.Frames)
-                Sprite.Frame = 0;
+	        var deltatime = gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (AncInput.KeyHeld(Keys.A) || AncInput.KeyDown(Keys.A))
+            AncInput.Update();
+
+            if (AncInput.KeyHeld(Keys.A))
             {
-                effect = SpriteEffects.FlipHorizontally;
-
-                location += new Vector2(-5,0);
+                starting = 4;
+                ending = 7;
+                if (Sprite.Frame < starting || Sprite.Frame > ending)
+                {
+                    Sprite.Frame = starting;
+                }
+                Location.X -= (float) ( 500 * deltatime);
+                //onsole.WriteLine("Walk west");
+            }
+            else if (AncInput.KeyHeld(Keys.D))
+            {
+                starting = 0;
+                ending = 3;
+                if ( Sprite.Frame < starting || Sprite.Frame > ending)
+                {
+                    Sprite.Frame = starting;
+                }
+                Location.X += (float)(500 * deltatime);
+                //Console.WriteLine("Walk east");
+            }
+            else if (AncInput.KeyHeld(Keys.W))
+            {
+                starting = 8;
+                ending = 10;
+                if (Sprite.Frame < starting || Sprite.Frame > ending)
+                {
+                    Sprite.Frame = starting;
+                }
+                Location.Y -= (float)( 500 * deltatime);
+                //Console.WriteLine("Walk north");
+            }
+            else if (AncInput.KeyHeld(Keys.S))
+            {
+                starting = 11;
+                ending = 14;
+                if (Sprite.Frame < starting || Sprite.Frame > ending)
+                {
+                    Sprite.Frame = starting;
+                }
+                Location.Y += (float) (500  * deltatime);
+                //onsole.WriteLine("Walk south");
+            }
+            else if (AncInput.KeyHeld(Keys.LeftControl))
+            {
+                starting = 16;
+                ending = 16;
+                if (Sprite.Frame < starting || Sprite.Frame > ending)
+                {
+                    Sprite.Frame = starting;
+                }
+                //Console.WriteLine("Crouch");
+            }
+            else if (AncInput.KeyUp(Keys.LeftControl))
+            {
+                starting = 15;
+                ending = 17;
+                if (Sprite.Frame < starting || Sprite.Frame > ending)
+                {
+                    Sprite.Frame = starting;
+                }
+                //Console.WriteLine("Crouch");
+            }
+            else
+            {
+                starting = 11;
+                ending = 11;
+                Sprite.Frame = 11;
             }
 
-            if(AncInput.KeyDown(Keys.D) || AncInput.KeyHeld(Keys.D))
-            {
-                effect = SpriteEffects.None;
 
-                location += new Vector2(5,0);
-            }
+
+            elapsedupdate += gameTime.ElapsedGameTime.Milliseconds;
+	        if (elapsedupdate > frametime)
+	        {
+		        elapsedupdate = 0;
+
+		        Sprite.Frame++;
+		        if (Sprite.Frame > ending)
+		        {
+			        Sprite.Frame = starting;
+		        }
+	        }
         }
 
         public override void Draw(GameTime gameTime)
         {
-            int Width = Sprite.Texture.Width / Sprite.columns ;
-            int Height = Sprite.Texture.Height / Sprite.rows;
-            int rows = Sprite.rows;
-            int columns = Sprite.columns;
-            int frame = Sprite.Frame;
-            int rowheight = Height / rows;
-            int columnwidth = Width / columns;
 
-            int row = frame / columns;
-            int column = frame % columns;
+            int columnwidth = Sprite.Texture.Width / Sprite.columns;
+            int rowheight = Sprite.Texture.Height / Sprite.rows;
 
-            Rectangle sourceRect = new Rectangle(columnwidth * column, rowheight * row, Width, Height);
-            Rectangle DestinationRect = new Rectangle((int)location.X, (int)location.Y, Width, Height);
+            Rectangle destrect = new Rectangle();
+            destrect.Width = columnwidth * 10;
+            destrect.Height = rowheight * 10;
+	        destrect.X = (int) Location.X;
+	        destrect.Y = (int) Location.Y;
 
-            Rectangle destinationRectangle = new Rectangle((int) location.X, (int) location.Y, Width, Height);
+            Rectangle sourcerect = new Rectangle();
+            sourcerect.Width = Sprite.Texture.Width / Sprite.columns;
+            sourcerect.Height = Sprite.Texture.Height / Sprite.rows;
+            sourcerect.X = Sprite.Frame * columnwidth;
+            sourcerect.Y = 0;
 
-            SYSTEM.SpriteBatch.Draw(Sprite.Texture, destinationRectangle, sourceRect, Color.White);
+            SYSTEM.SpriteBatch.Draw(Sprite.Texture, destrect, sourcerect, Color.White);
         }
 
-        public override void Instantiate(AncSystem sys)
+        public override void Instantiate(AncSystem sys, AncScene scene)
         {
             SYSTEM = sys;
-            Sprite = new AncAnimatedSprite(this, 1 , 4);
-            Sprite.FileLocation = "peterwalking";
+            Sprite = new AncAnimatedSprite(this, 1, 18);
+            Sprite.FileLocation = "peterspritesheet";
             AnchorAniSprite = Sprite;
+            Parent = scene;
+
+
         }
     }
 }
+
