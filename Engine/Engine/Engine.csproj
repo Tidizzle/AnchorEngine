@@ -62,10 +62,17 @@
     <Compile Include="DefaultScene.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RedBackground.cs" />
+    <Compile Include="VariantChanger.cs" />
     <Compile Include="VariantPool.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\MapLib\AnchorMapLib\AnchorMapLib\AnchorMapLib.csproj">
+      <Project>{0D134E21-5234-4747-BFF5-D81929DB0788}</Project>
+      <Name>AnchorMapLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
