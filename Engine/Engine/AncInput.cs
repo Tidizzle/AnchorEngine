@@ -18,19 +18,19 @@ namespace Engine
              MouseState = Mouse.GetState();
          }
 
-         public static bool KeyUp(Keys K)
+         public static bool KeyUp(Keys k)
          {
-             return KeyboardState.IsKeyUp(K) && PreviousKeyboardState.IsKeyDown(K);
+             return KeyboardState.IsKeyUp(k) && PreviousKeyboardState.IsKeyDown(k);
          }
 
-         public static bool KeyDown(Keys K)
+         public static bool KeyDown(Keys k)
          {
-             return KeyboardState.IsKeyDown(K) && PreviousKeyboardState.IsKeyUp(K);
+             return KeyboardState.IsKeyDown(k) && PreviousKeyboardState.IsKeyUp(k);
          }
 
-         public static bool KeyHeld(Keys K)
+         public static bool KeyHeld(Keys k)
          {
-             return KeyboardState.IsKeyDown(K) && PreviousKeyboardState.IsKeyDown(K);
+             return KeyboardState.IsKeyDown(k) && PreviousKeyboardState.IsKeyDown(k);
          }
 
          public static bool MouseLeftDown()

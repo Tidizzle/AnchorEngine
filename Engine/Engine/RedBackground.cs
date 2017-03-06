@@ -1,30 +1,25 @@
-﻿using Engine;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Test
+namespace Engine
 {
     public class RedBackground : Anchor
     {
-        private Texture2D texture;
+        private Texture2D _texture;
 
-        public RedBackground(string Name)
+        public RedBackground(string name)
         {
-            base.Name = Name;
+            Name = name;
         }
 
         public override void LoadContent()
         {
-            var o = SYSTEM.GraphicsDevice.Viewport.Width;
-            var j = SYSTEM.GraphicsDevice.Viewport.Height;
-            var k = o * j;
-
-           Color[] ColorData = new Color[1000 * 1000];
-            for (int i = 0; i < 100000; i++)
+           var colorData = new Color[1000 * 1000];
+            for (var i = 0; i < 100000; i++)
             {
-                ColorData[i] = Color.Red;
+                colorData[i] = Color.Red;
             }
-            texture.SetData(ColorData);
+            _texture.SetData(colorData);
         }
 
         public override void Update(GameTime gameTime)
@@ -34,15 +29,15 @@ namespace Test
 
         public override void Draw(GameTime gameTime)
         {
-            Vector2 origin = new Vector2(SYSTEM.GraphicsDevice.Viewport.Width / 2f, SYSTEM.GraphicsDevice.Viewport.Height /2f);
-            SYSTEM.SpriteBatch.Draw(texture, origin, Color.White);
+            var origin = new Vector2(SystemRef.GraphicsDevice.Viewport.Width / 2f, SystemRef.GraphicsDevice.Viewport.Height /2f);
+            SystemRef.SpriteBatch.Draw(_texture, origin, Color.White);
         }
 
 
         public override void Instantiate(AncSystem sys, AncScene scene)
         {
-            SYSTEM = sys;
-            texture = new Texture2D(SYSTEM.GraphicsDevice, 500,500);
+            SystemRef = sys;
+            _texture = new Texture2D(SystemRef.GraphicsDevice, 500,500);
         }
     }
 }

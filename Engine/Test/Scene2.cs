@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Engine;
 using Microsoft.Xna.Framework;
 
@@ -7,14 +6,14 @@ namespace Test
 {
 	public class Scene2 : AncScene
 	{
-		public Scene2(string Name) : base(Name)
+		public Scene2(string name) : base(name)
 		{
-			base.Name = Name;
+			Name = name;
 		}
 
 		public override void LoadContent()
 		{
-			foreach (var obj in objectList.Values)
+			foreach (var obj in ObjectList.Values)
 			{
 				obj.LoadContent();
 			}
@@ -22,7 +21,7 @@ namespace Test
 
 		public override void Update(GameTime gameTime)
 		{
-			foreach (var obj in objectList.Values)
+			foreach (var obj in ObjectList.Values)
 			{
 				obj.Update(gameTime);
 			}
@@ -30,7 +29,7 @@ namespace Test
 
 		public override void Draw(GameTime gameTime)
 		{
-			foreach (var obj in objectList.Values)
+			foreach (var obj in ObjectList.Values)
 			{
 				obj.Draw(gameTime);
 			}
@@ -38,19 +37,19 @@ namespace Test
 
 		public override void Instantiate(AncSystem sys)
 		{
-			SYSTEM = sys;
-			objectList = new Dictionary<string, Anchor>();
+			System = sys;
+			ObjectList = new Dictionary<string, Anchor>();
 			var bg = new Grassbg("Grass");
 			bg.Instantiate(sys, this);
-			addObj(bg);
+			AddObj(bg);
 
-			var sticky = new sticky("Sticky");
+			var sticky = new Sticky("Sticky");
 			sticky.Instantiate(sys, this);
-			addObj(sticky);
+			AddObj(sticky);
 
-			var camera = new Engine.Camera(sys.GraphicsDevice, "Camera", sticky);
+			var camera = new Camera(sys.GraphicsDevice, "Camera", sticky);
 			camera.Instantiate(sys, this);
-			addObj(camera);
+			AddObj(camera);
 		}
 	}
 }

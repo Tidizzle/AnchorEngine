@@ -4,30 +4,30 @@ namespace Engine
 {
     public class AncApplication : IDisposable
     {
-        private AncSystem SYSTEM;
+        private readonly AncSystem _system;
 
         public AncApplication(int width, int height, bool fullscreen, bool multisampling)
         {
-            SYSTEM = new AncSystem(width, height, fullscreen, multisampling);
+            _system = new AncSystem(width, height, fullscreen, multisampling);
         }
 
         public void Start(params AncScene[] scenes)
         {
-            SYSTEM.Controller.SYSTEM = SYSTEM;
+            _system.Controller.System = _system;
 
             if (scenes.Length > 0)
             {
                 foreach (var scene in scenes)
                 {
-                    SYSTEM.Controller.Add(scene);
+                    _system.Controller.Add(scene);
                 }
             }
-            SYSTEM.Run();
+            _system.Run();
         }
 
         public void Dispose()
         {
-            SYSTEM.Dispose();
+            _system.Dispose();
         }
     }
 }

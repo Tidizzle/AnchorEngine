@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using Engine;
+﻿using Engine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -9,13 +7,12 @@ namespace Test
 {
     public class PeterAni : Anchor
     {
-        private AncAnimatedSprite Sprite;
-        //private Vector2 origin;
-        private int elapsedupdate;
-        private readonly int frametime = 100;
+        private AncAnimatedSprite _sprite;
+        private int _elapsedupdate;
+        private const int Frametime = 100;
 
-        private int starting;
-        private int ending;
+        private int _starting;
+        private int _ending;
 
         public PeterAni(string name)
         {
@@ -27,15 +24,15 @@ namespace Test
         public override void LoadContent()
         {
 
-	        Sprite.Texture = SYSTEM.Content.Load<Texture2D>(Sprite.FileLocation);
-            AnchorAniSprite = Sprite;
+	        _sprite.Texture = SystemRef.Content.Load<Texture2D>(_sprite.FileLocation);
+            AnchorAniSprite = _sprite;
 
-	        GlobalWidth = Sprite.Texture.Width / Sprite.columns;
-	        GlobalHeight = Sprite.Texture.Height;
+	        GlobalWidth = _sprite.Texture.Width / _sprite.Columns;
+	        GlobalHeight = _sprite.Texture.Height;
 	        Scale = new Vector2(10f);
 
 	        Location.X = Parent.GraphicsDevice.Viewport.Width / 2 - (int) (GlobalWidth / 2f * Scale.X);
-	        Location.Y = SYSTEM.GraphicsDevice.Viewport.Height / 2 -  (int) (GlobalHeight / 2f * Scale.Y);
+	        Location.Y = SystemRef.GraphicsDevice.Viewport.Height / 2 -  (int) (GlobalHeight / 2f * Scale.Y);
         }
 
         public override void Update(GameTime gameTime)
@@ -46,86 +43,80 @@ namespace Test
 
             if (AncInput.KeyHeld(Keys.A))
             {
-                starting = 4;
-                ending = 7;
-                if (Sprite.Frame < starting || Sprite.Frame > ending)
+                _starting = 4;
+                _ending = 7;
+                if (_sprite.Frame < _starting || _sprite.Frame > _ending)
                 {
-                    Sprite.Frame = starting;
+                    _sprite.Frame = _starting;
                 }
                 Location.X -= (float) ( 500 * deltatime);
-                //onsole.WriteLine("Walk west");
             }
             else if (AncInput.KeyHeld(Keys.D))
             {
-                starting = 0;
-                ending = 3;
-                if ( Sprite.Frame < starting || Sprite.Frame > ending)
+                _starting = 0;
+                _ending = 3;
+                if ( _sprite.Frame < _starting || _sprite.Frame > _ending)
                 {
-                    Sprite.Frame = starting;
+                    _sprite.Frame = _starting;
                 }
                 Location.X += (float)(500 * deltatime);
-                //Console.WriteLine("Walk east");
             }
             else if (AncInput.KeyHeld(Keys.W))
             {
-                starting = 8;
-                ending = 10;
-                if (Sprite.Frame < starting || Sprite.Frame > ending)
+                _starting = 8;
+                _ending = 10;
+                if (_sprite.Frame < _starting || _sprite.Frame > _ending)
                 {
-                    Sprite.Frame = starting;
+                    _sprite.Frame = _starting;
                 }
                 Location.Y -= (float)( 500 * deltatime);
-                //Console.WriteLine("Walk north");
             }
             else if (AncInput.KeyHeld(Keys.S))
             {
-                starting = 11;
-                ending = 14;
-                if (Sprite.Frame < starting || Sprite.Frame > ending)
+                _starting = 11;
+                _ending = 14;
+                if (_sprite.Frame < _starting || _sprite.Frame > _ending)
                 {
-                    Sprite.Frame = starting;
+                    _sprite.Frame = _starting;
                 }
                 Location.Y += (float) (500  * deltatime);
-                //onsole.WriteLine("Walk south");
             }
             else if (AncInput.KeyHeld(Keys.LeftControl))
             {
-                starting = 16;
-                ending = 16;
-                if (Sprite.Frame < starting || Sprite.Frame > ending)
+                _starting = 16;
+                _ending = 16;
+                if (_sprite.Frame < _starting || _sprite.Frame > _ending)
                 {
-                    Sprite.Frame = starting;
+                    _sprite.Frame = _starting;
                 }
-                //Console.WriteLine("Crouch");
             }
             else if (AncInput.KeyUp(Keys.LeftControl))
             {
-                starting = 15;
-                ending = 17;
-                if (Sprite.Frame < starting || Sprite.Frame > ending)
+                _starting = 15;
+                _ending = 17;
+                if (_sprite.Frame < _starting || _sprite.Frame > _ending)
                 {
-                    Sprite.Frame = starting;
+                    _sprite.Frame = _starting;
                 }
-                //Console.WriteLine("Crouch");
             }
             else
             {
-                starting = 11;
-                ending = 11;
-                Sprite.Frame = 11;
+                _starting = 11;
+                _ending = 11;
+                _sprite.Frame = 11;
             }
 
 
 
-            elapsedupdate += gameTime.ElapsedGameTime.Milliseconds;
-	        if (elapsedupdate > frametime)
+            _elapsedupdate += gameTime.ElapsedGameTime.Milliseconds;
+	        if (_elapsedupdate > Frametime)
 	        {
-		        elapsedupdate = 0;
+		        _elapsedupdate = 0;
 
-		        Sprite.Frame++;
-		        if (Sprite.Frame > ending)
+		        _sprite.Frame++;
+		        if (_sprite.Frame > _ending)
 		        {
-			        Sprite.Frame = starting;
+			        _sprite.Frame = _starting;
 		        }
 	        }
         }
@@ -133,30 +124,33 @@ namespace Test
         public override void Draw(GameTime gameTime)
         {
 
-            int columnwidth = Sprite.Texture.Width / Sprite.columns;
-            int rowheight = Sprite.Texture.Height / Sprite.rows;
+            var columnwidth = _sprite.Texture.Width / _sprite.Columns;
+            var rowheight = _sprite.Texture.Height / _sprite.Rows;
 
-            Rectangle destrect = new Rectangle();
-            destrect.Width = columnwidth * 10;
-            destrect.Height = rowheight * 10;
-	        destrect.X = (int) Location.X;
-	        destrect.Y = (int) Location.Y;
+            var destrect = new Rectangle
+            {
+                Width = columnwidth * 10,
+                Height = rowheight * 10,
+                X = (int) Location.X,
+                Y = (int) Location.Y
+            };
 
-            Rectangle sourcerect = new Rectangle();
-            sourcerect.Width = Sprite.Texture.Width / Sprite.columns;
-            sourcerect.Height = Sprite.Texture.Height / Sprite.rows;
-            sourcerect.X = Sprite.Frame * columnwidth;
-            sourcerect.Y = 0;
+            var sourcerect = new Rectangle
+            {
+                Width = _sprite.Texture.Width / _sprite.Columns,
+                Height = _sprite.Texture.Height / _sprite.Rows,
+                X = _sprite.Frame * columnwidth,
+                Y = 0
+            };
 
-            SYSTEM.SpriteBatch.Draw(Sprite.Texture, destrect, sourcerect, Color.White);
+            SystemRef.SpriteBatch.Draw(_sprite.Texture, destrect, sourcerect, Color.White);
         }
 
         public override void Instantiate(AncSystem sys, AncScene scene)
         {
-            SYSTEM = sys;
-            Sprite = new AncAnimatedSprite(this, 1, 18);
-            Sprite.FileLocation = "peterspritesheet";
-            AnchorAniSprite = Sprite;
+            SystemRef = sys;
+            _sprite = new AncAnimatedSprite(this, 1, 18) {FileLocation = "peterspritesheet"};
+            AnchorAniSprite = _sprite;
             Parent = scene;
 
 

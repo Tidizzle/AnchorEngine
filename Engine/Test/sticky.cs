@@ -5,28 +5,28 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Test
 {
-    public class sticky : Anchor
+    public class Sticky : Anchor
     {
 
-        private AncSprite Sprite;
-        private Vector2 scale = new Vector2(0);
-        private Vector2 origin;
-        private Vector2 location;
+        private AncSprite _sprite;
+        private readonly Vector2 _scale = new Vector2(0);
+        private Vector2 _origin;
+        private Vector2 _location;
 
-        public sticky(string name)
+        public Sticky(string name)
         {
             Name = name;
         }
 
         public override void LoadContent()
         {
-            var loc = Sprite.fileLocation;
-            Sprite.Texture = SYSTEM.Content.Load<Texture2D>(loc);
+            var loc = _sprite.FileLocation;
+            _sprite.Texture = SystemRef.Content.Load<Texture2D>(loc);
 
-            origin.X = Sprite.Texture.Width / 2f;
-            origin.Y = Sprite.Texture.Height / 2f;
-            location.X = SYSTEM.GraphicsDevice.Viewport.Width / 4f;
-            location.Y = SYSTEM.GraphicsDevice.Viewport.Height / 4f;
+            _origin.X = _sprite.Texture.Width / 2f;
+            _origin.Y = _sprite.Texture.Height / 2f;
+            _location.X = SystemRef.GraphicsDevice.Viewport.Width / 4f;
+            _location.Y = SystemRef.GraphicsDevice.Viewport.Height / 4f;
         }
 
         public override void Update(GameTime gameTime)
@@ -35,24 +35,21 @@ namespace Test
             var state = Keyboard.GetState();
             if (state.IsKeyDown(Keys.Escape))
             {
-                SYSTEM.Exit();
+                SystemRef.Exit();
             }
         }
 
         public override void Draw(GameTime gameTime)
         {
-            int x = SYSTEM.GraphicsDevice.Viewport.Width / 2;
-            int y = SYSTEM.GraphicsDevice.Viewport.Height / 2;
-            SYSTEM.SpriteBatch.Draw(Sprite.Texture,location, color: Color.White, scale: scale, origin: origin);
+            SystemRef.SpriteBatch.Draw(_sprite.Texture,_location, color: Color.White, scale: _scale, origin: _origin);
         }
 
 
         public override void Instantiate(AncSystem sys, AncScene scene)
         {
-            SYSTEM = sys;
-            Sprite = new AncSprite(this);
-            Sprite.fileLocation = "stickdude";
-            AnchorSprite = Sprite;
+            SystemRef = sys;
+            _sprite = new AncSprite(this) {FileLocation = "stickdude"};
+            AnchorSprite = _sprite;
         }
     }
 }

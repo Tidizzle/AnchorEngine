@@ -6,16 +6,17 @@ namespace Engine
     public abstract class Anchor : IDisposable
     {
         public string Name;
-        public AncSystem SYSTEM;
+        public AncSystem SystemRef;
         public AncSprite AnchorSprite;
         public AncAnimatedSprite AnchorAniSprite;
         public AncScene Parent;
         public Vector2 Location;
-        public Engine.Camera GlobalCamera;
+        public Camera GlobalCamera;
         public string Focus;
         public int GlobalWidth;
         public int GlobalHeight;
 	    public Vector2 Scale;
+                                    public bool canMove;
 
 
         public abstract void LoadContent();
@@ -27,5 +28,16 @@ namespace Engine
         {
             AnchorSprite?.Dispose();
         }
+
+        public virtual Vector2 GetBottomLeft()
+        {
+            return new Vector2(Location.X, Location.Y + GlobalHeight);
+        }
+
+        public virtual Vector2 GetBottomRight()
+        {
+            return new Vector2(Location.X + GlobalWidth, Location.Y + GlobalHeight);
+        }
+
     }
 }

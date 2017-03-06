@@ -7,11 +7,11 @@ namespace Test
 {
     public class Peter : Anchor
     {
-        private AncSprite Sprite;
-        private readonly Vector2 Scale = new Vector2(10f);
-        private Vector2 location;
-        private Vector2 Origin;
-        private SpriteEffects effect;
+        private AncSprite _sprite;
+        private readonly Vector2 _scale = new Vector2(10f);
+        private Vector2 _location;
+        private Vector2 _origin;
+        private SpriteEffects _effect;
 
         public Peter(string name)
         {
@@ -20,13 +20,13 @@ namespace Test
 
         public override void LoadContent()
         {
-            Sprite.Texture = SYSTEM.Content.Load<Texture2D>(Sprite.fileLocation);
-            AnchorSprite = Sprite;
+            _sprite.Texture = SystemRef.Content.Load<Texture2D>(_sprite.FileLocation);
+            AnchorSprite = _sprite;
 
-            location.X = SYSTEM.GraphicsDevice.Viewport.Width / 2f;
-            location.Y = SYSTEM.GraphicsDevice.Viewport.Height / 2f;
-            Origin.X = Sprite.Texture.Width / 2f;
-            Origin.Y = Sprite.Texture.Height / 2f;
+            _location.X = SystemRef.GraphicsDevice.Viewport.Width / 2f;
+            _location.Y = SystemRef.GraphicsDevice.Viewport.Height / 2f;
+            _origin.X = _sprite.Texture.Width / 2f;
+            _origin.Y = _sprite.Texture.Height / 2f;
 
         }
 
@@ -36,33 +36,30 @@ namespace Test
 
             if (AncInput.KeyHeld(Keys.A) || AncInput.KeyDown(Keys.A))
             {
-                effect = SpriteEffects.FlipHorizontally;
+                _effect = SpriteEffects.FlipHorizontally;
 
-                location += new Vector2(-5,0);
+                _location += new Vector2(-5,0);
             }
 
             if (AncInput.KeyDown(Keys.D) || AncInput.KeyHeld(Keys.D))
             {
-                effect = SpriteEffects.None;
+                _effect = SpriteEffects.None;
 
-                location += new Vector2(5, 0);
+                _location += new Vector2(5, 0);
             }
         }
 
         public override void Draw(GameTime gameTime)
         {
-            int x = SYSTEM.GraphicsDevice.Viewport.Width / 2 + Sprite.Texture.Width / 2;
-            int y = SYSTEM.GraphicsDevice.Viewport.Height / 2 + Sprite.Texture.Height / 2;
-            SYSTEM.SpriteBatch.Draw(Sprite.Texture, location, color: Color.White, scale: Scale, origin: Origin, effects: effect);
+            SystemRef.SpriteBatch.Draw(_sprite.Texture, _location, color: Color.White, scale: _scale, origin: _origin, effects: _effect);
         }
 
 
         public override void Instantiate(AncSystem sys, AncScene scene)
         {
-            SYSTEM = sys;
-            Sprite = new AncSprite(this);
-            Sprite.fileLocation = "peter";
-            AnchorSprite = Sprite;
+            SystemRef = sys;
+            _sprite = new AncSprite(this) {FileLocation = "peter"};
+            AnchorSprite = _sprite;
 
         }
     }

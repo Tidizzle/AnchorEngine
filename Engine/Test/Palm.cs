@@ -8,13 +8,13 @@ namespace Test
 	{
 		public Palm(string name)
 		{
-			this.Name = name;
+			Name = name;
 		}
 
 		public override void LoadContent()
 		{
-			AnchorSprite.Texture = SYSTEM.Content.Load<Texture2D>(AnchorSprite.fileLocation);
-			Scale = new Vector2(7f);
+			AnchorSprite.Texture = SystemRef.Content.Load<Texture2D>(AnchorSprite.FileLocation);
+			Scale = new Vector2(4f);
 		}
 
 		public override void Update(GameTime gameTime)
@@ -24,16 +24,15 @@ namespace Test
 
 		public override void Draw(GameTime gameTime)
 		{
-			SYSTEM.SpriteBatch.Draw(AnchorSprite.Texture, new Vector2(0,0), color: Color.White, scale: Scale);
+			SystemRef.SpriteBatch.Draw(AnchorSprite.Texture, new Vector2(0,0), color: Color.White, scale: Scale, layerDepth:0.004f);
 		}
 
 		public override void Instantiate(AncSystem sys, AncScene scene)
 		{
-			SYSTEM = sys;
+			SystemRef = sys;
 			Parent = scene;
 
-			AnchorSprite = new AncSprite(this);
-			AnchorSprite.fileLocation = "Palm";
+		    AnchorSprite = new AncSprite(this) {FileLocation = "CollisionTest"};
 		}
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq.Expressions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -8,38 +7,34 @@ namespace Engine
 {
     public class Camera : Anchor
     {
-        public Viewport _Viewport;
+        public Viewport Viewport;
 
- 		 private float rotation;
-		 private float zoom;
-		 //private Vector2 location;
-		 private Vector2 origin;
-		 private Anchor RefToFocus;
+ 		 private float _rotation;
+		 private float _zoom;
+		 private readonly Anchor _refToFocus;
 
 
 		 public Camera(GraphicsDevice graphicsDevice, string name, Anchor Ref)
 		 {
-			 _Viewport = graphicsDevice.Viewport;
+			 Viewport = graphicsDevice.Viewport;
 			 Name = name;
-			 RefToFocus = Ref;
-
-
-        }
+			 _refToFocus = Ref;
+		 }
 
         public Matrix GetViewMatrix()
         {
 	        return
 		        Matrix.CreateTranslation(-Location.X, -Location.Y, 0) *
-		        Matrix.CreateRotationZ(rotation) *
-		        Matrix.CreateScale(zoom, zoom, 1)  *
+		        Matrix.CreateRotationZ(_rotation) *
+		        Matrix.CreateScale(_zoom, _zoom, 1)  *
 	       		Matrix.CreateTranslation( (int) (Parent.GraphicsDevice.Viewport.Width / 2f), (int) (Parent.GraphicsDevice.Viewport.Height / 2f), 0);
 
         }
 
 	    public override void LoadContent()
 	    {
-		    Location.X = RefToFocus.Location.X + (int) (RefToFocus.GlobalWidth / 2f * RefToFocus.Scale.X);
-		    Location.Y = RefToFocus.Location.Y + (int) (RefToFocus.GlobalHeight / 2f * RefToFocus.Scale.Y);
+		    Location.X = _refToFocus.Location.X + (int) (_refToFocus.GlobalWidth / 2f * _refToFocus.Scale.X);
+		    Location.Y = _refToFocus.Location.Y + (int) (_refToFocus.GlobalHeight / 2f * _refToFocus.Scale.Y);
 
 	    }
 
@@ -50,39 +45,39 @@ namespace Engine
             var deltatime = (float) gameTime.ElapsedGameTime.TotalSeconds;
 
             if (AncInput.KeyHeld(Keys.Q))
-                rotation -= 1 * deltatime;
+                _rotation -= 1 * deltatime;
 
             if (AncInput.KeyHeld(Keys.E))
-                rotation += 1 * deltatime;
+                _rotation += 1 * deltatime;
 
             if (AncInput.KeyDown(Keys.Space))
-                rotation = 0;
+                _rotation = 0;
 
             if (AncInput.KeyHeld(Keys.R))
-                zoom += .1f;
+                _zoom += .02f;
 
             if (AncInput.KeyHeld(Keys.F))
-                zoom -= .1f;
+                _zoom -= .02f;
 
-	        if (zoom <= .6f)
+	        if (_zoom <= .1f)
 	        {
-		        zoom = 0.6f;
+		        _zoom = 0.1f;
 	        }
-	        else if (zoom >= 1.1f)
+	        else if (_zoom >= 3f)
 	        {
-		        zoom = 1.1f;
+		        _zoom = 3f;
 	        }
 
 	        if (AncInput.KeyHeld(Keys.Escape))
 	        {
-		        SYSTEM.Exit();
+		        SystemRef.Exit();
 	        }
 
             GlobalCamera = this;
 
-	        Location.X = RefToFocus.Location.X + (int) (RefToFocus.GlobalWidth / 2f * RefToFocus.Scale.X);
-	        Location.Y = RefToFocus.Location.Y + (int) (RefToFocus.GlobalHeight / 2f * RefToFocus.Scale.Y);
-	        Console.WriteLine(zoom);
+	        Location.X = _refToFocus.Location.X + (int) (_refToFocus.GlobalWidth / 2f * _refToFocus.Scale.X);
+	        Location.Y = _refToFocus.Location.Y + (int) (_refToFocus.GlobalHeight / 2f * _refToFocus.Scale.Y);
+	        //Console.WriteLine(_zoom);
 
         }
 
@@ -94,11 +89,11 @@ namespace Engine
         public override void Instantiate(AncSystem sys, AncScene scene)
         {
             Parent = scene;
-            SYSTEM = sys;
+            SystemRef = sys;
             GlobalCamera = this;
 
-            rotation = 0;
-            zoom = 1;
+            _rotation = 0;
+            _zoom = 1;
 
         }
     }

@@ -7,29 +7,31 @@ namespace Test
 {
 	public class Adam : Anchor
 	{
-		private AncAnimatedSprite Sprite;
-		private int elapsedupdate;
-		private readonly int frametime = 100;
+		private AncAnimatedSprite _sprite;
+		private int _elapsedupdate;
+	    private const int Frametime = 100;
 
-		private int starting;
-		private int ending;
+	    private int _starting;
+		private int _ending;
 
-		public Adam(string Name)
+
+		public Adam(string name)
 		{
-			this.Name = Name;
+		    Name = name;
+		    canMove = true;
 		}
 
 		public override void LoadContent()
 		{
-			Sprite.Texture = SYSTEM.Content.Load<Texture2D>(Sprite.FileLocation);
-			AnchorAniSprite = Sprite;
+			_sprite.Texture = SystemRef.Content.Load<Texture2D>("AdamSheetCorners");
+			AnchorAniSprite = _sprite;
 
-			GlobalWidth = Sprite.Texture.Width / Sprite.columns;
-			GlobalHeight = Sprite.Texture.Height;
-			Scale = new Vector2(5f);
+			GlobalWidth = _sprite.Texture.Width / _sprite.Columns;
+			GlobalHeight = _sprite.Texture.Height;
+			Scale = new Vector2(2f);
 
 			Location.X = Parent.GraphicsDevice.Viewport.Width / 2 - (int) (GlobalWidth / 2f * Scale.X);
-			Location.Y = SYSTEM.GraphicsDevice.Viewport.Height / 2 - (int) (GlobalHeight / 2f * Scale.Y);
+			Location.Y = SystemRef.GraphicsDevice.Viewport.Height / 2 - (int) (GlobalHeight / 2f * Scale.Y);
 		}
 
 		public override void Update(GameTime gameTime)
@@ -38,79 +40,109 @@ namespace Test
 
 			AncInput.Update();
 
-			if (AncInput.KeyHeld(Keys.A))
+		    if (canMove)
+		    {
+		        if (AncInput.KeyHeld(Keys.A))
+		        {
+		            _starting = 7;
+		            _ending = 13;
+		            if (_sprite.Frame < _starting || _sprite.Frame > _ending)
+		                _sprite.Frame = _starting;
+		            Location.X -= (float) (500 * deltatime);
+		        }
+		        else if (AncInput.KeyHeld(Keys.D))
+		        {
+		            _starting = 0;
+		            _ending = 6;
+		            if (_sprite.Frame < _starting || _sprite.Frame > _ending)
+		                _sprite.Frame = _starting;
+		            Location.X += (float) (500 * deltatime);
+		        }
+		        else if (AncInput.KeyHeld(Keys.W))
+		        {
+		            _starting = 20;
+		            _ending = 24;
+		            if (_sprite.Frame < _starting || _sprite.Frame > _ending)
+		                _sprite.Frame = _starting;
+		            Location.Y -= (float) (500 * deltatime);
+		        }
+		        else if (AncInput.KeyHeld(Keys.S))
+		        {
+		            _starting = 15;
+		            _ending = 19;
+		            if (_sprite.Frame < _starting || _sprite.Frame > _ending)
+		                _sprite.Frame = _starting;
+		            Location.Y += (float) (500 * deltatime);
+		        }
+		        else
+		        {
+		            _starting = 14;
+		            _ending = 14;
+		            _sprite.Frame = 14;
+		        }
+		    }
+		    else
+		    {
+		        _starting = 14;
+		        _ending = 14;
+		        _sprite.Frame = 14;
+		    }
+
+
+
+		    _elapsedupdate += gameTime.ElapsedGameTime.Milliseconds;
+			if (_elapsedupdate > Frametime)
 			{
-				starting = 7;
-				ending = 13;
-				if (Sprite.Frame < starting || Sprite.Frame > ending)
-					Sprite.Frame = starting;
-				Location.X -= (float) (500 * deltatime);
-			}
-			else if (AncInput.KeyHeld(Keys.D))
-			{
-				starting = 0;
-				ending = 6;
-				if (Sprite.Frame < starting || Sprite.Frame > ending)
-					Sprite.Frame = starting;
-				Location.X += (float) (500 * deltatime);
-			}
-			else if (AncInput.KeyHeld(Keys.W))
-			{
-				starting = 20;
-				ending = 24;
-				if (Sprite.Frame < starting || Sprite.Frame > ending)
-					Sprite.Frame = starting;
-				Location.Y -= (float) (500 * deltatime);
-			}
-			else if (AncInput.KeyHeld(Keys.S))
-			{
-				starting = 15;
-				ending = 19;
-				if (Sprite.Frame < starting || Sprite.Frame > ending)
-					Sprite.Frame = starting;
-				Location.Y += (float) (500 * deltatime);
-			}
-			else
-			{
-				starting = 14;
-				ending = 14;
-				Sprite.Frame = 14;
+				_elapsedupdate = 0;
+				_sprite.Frame++;
+				if (_sprite.Frame > _ending)
+					_sprite.Frame = _starting;
 			}
 
-			elapsedupdate += gameTime.ElapsedGameTime.Milliseconds;
-			if (elapsedupdate > frametime)
-			{
-				elapsedupdate = 0;
-				Sprite.Frame++;
-				if (Sprite.Frame > ending)
-					Sprite.Frame = starting;
-			}
+		    if (Location.X < -100)
+		        Location.X = -100;
+
+		    if (Location.X > 9700)
+		        Location.X = 9700;
+
+		    if (Location.Y < -100)
+		        Location.Y = -100;
+
+		    if (Location.Y > 9700)
+		        Location.Y = 9700;
+
+
 		}
 
 		public override void Draw(GameTime gameTime)
 		{
-			int columnwidth = Sprite.Texture.Width / Sprite.columns;
-			int rowheight = Sprite.Texture.Height / Sprite.rows;
-			Rectangle destrect = new Rectangle();
-			destrect.Width = (int) (columnwidth * Scale.X);
-			destrect.Height = (int) (rowheight * Scale.Y);
-			destrect.X = (int) Location.X;
-			destrect.Y = (int) Location.Y;
-			Rectangle sourcerect  = new Rectangle();
-			sourcerect.Width = columnwidth;
-			sourcerect.Height = rowheight;
-			sourcerect.X = Sprite.Frame * columnwidth;
-			sourcerect.Y = 0;
-			SYSTEM.SpriteBatch.Draw(Sprite.Texture, destrect, sourcerect, Color.White);
+			var columnwidth = _sprite.Texture.Width / _sprite.Columns;
+			var rowheight = _sprite.Texture.Height / _sprite.Rows;
+		    var destrect = new Rectangle
+		    {
+		        Width = (int) (columnwidth * Scale.X),
+		        Height = (int) (rowheight * Scale.Y),
+		        X = (int) Location.X,
+		        Y = (int) Location.Y
+		    };
+		    var sourcerect = new Rectangle
+		    {
+		        Width = columnwidth,
+		        Height = rowheight,
+		        X = _sprite.Frame * columnwidth,
+		        Y = 0
+		    };
+		    //System.SpriteBatch.Draw(_sprite.Texture, destrect, sourcerect, Color.White, layerDepth: 0.003f);
+		    SystemRef.SpriteBatch.Draw(_sprite.Texture, null, destrect, sourcerect, null, 0f, null,Color.White, layerDepth: 0.002f);
+
 		}
 
 		public override void Instantiate(AncSystem sys, AncScene scene)
 		{
-			SYSTEM = sys;
+			SystemRef = sys;
 			Parent = scene;
-			Sprite = new AncAnimatedSprite(this,1, 25);
-			Sprite.FileLocation = "AdamSheet";
-			AnchorAniSprite = Sprite;
+		    _sprite = new AncAnimatedSprite(this, 1, 25) {FileLocation = "AdamSheet"};
+		    AnchorAniSprite = _sprite;
 		}
 	}
 }

@@ -2,29 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace Engine
 {
     public class AncSceneController : IDisposable
     {
-        internal AncSystem SYSTEM;
-        public  Dictionary<string, AncScene> sceneList = new Dictionary<string, AncScene>();
-        public AncScene currentScene;
+        internal AncSystem System;
+        public  Dictionary<string, AncScene> SceneList = new Dictionary<string, AncScene>();
+        public AncScene CurrentScene;
 
         public void Add(AncScene scene)
         {
-            sceneList.Add(scene.Name, scene);
+            SceneList.Add(scene.Name, scene);
         }
 
         public void Instantiate()
         {
-            currentScene = sceneList.FirstOrDefault().Value;
+            CurrentScene = SceneList.FirstOrDefault().Value;
 
-            foreach (var scene in sceneList.Values)
+            foreach (var scene in SceneList.Values)
             {
-                scene.GraphicsDevice = SYSTEM.GraphicsDevice;
-                scene.Instantiate(SYSTEM);
+                scene.GraphicsDevice = System.GraphicsDevice;
+                scene.Instantiate(System);
             }
 
 
@@ -32,7 +31,7 @@ namespace Engine
 
         public void LoadContent()
         {
-            foreach (var scene in sceneList.Values)
+            foreach (var scene in SceneList.Values)
             {
                 scene.LoadContent();
             }
@@ -40,23 +39,23 @@ namespace Engine
 
         public void Update(GameTime gameTime)
         {
-            currentScene.Update(gameTime);
+            CurrentScene.Update(gameTime);
         }
 
         public void Draw(GameTime gameTime)
         {
-            SYSTEM.GraphicsDevice.Clear(Color.Green);
-            currentScene.Draw(gameTime);
+            System.GraphicsDevice.Clear(Color.Green);
+            CurrentScene.Draw(gameTime);
         }
 
         public void Dispose()
         {
-            currentScene.Dispose();
+            CurrentScene.Dispose();
         }
 
         public void DisposeAll()
         {
-            foreach (var scene in sceneList.Values)
+            foreach (var scene in SceneList.Values)
             {
                 scene.Dispose();
             }
@@ -64,18 +63,18 @@ namespace Engine
 
         #region Scene Modification
 
-        internal AncScene curr;
+        internal AncScene Curr;
 
-        public void switchScene(String SceneName)
+        public void SwitchScene(string sceneName)
         {
-            curr = new DefaultScene("SafeDefault");
-            if (sceneList.ContainsKey(SceneName))
+            Curr = new DefaultScene("SafeDefault");
+            if (SceneList.ContainsKey(sceneName))
             {
-                this.curr = sceneList[SceneName];
+                Curr = SceneList[sceneName];
             }
 
-            Console.WriteLine(curr.Name);
-            currentScene = curr;
+            Console.WriteLine(Curr.Name);
+            CurrentScene = Curr;
         }
 
         #endregion

@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A7B6848B-0EF0-4F53-B264-877DBC6CC801}</ProjectGuid>
+    <ProjectGuid>{C8619C79-92E1-4AB0-AD4D-B83BBCA06438}</ProjectGuid>
     <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Test</RootNamespace>
-    <AssemblyName>Test</AssemblyName>
+    <RootNamespace>FileTest</RootNamespace>
+    <AssemblyName>FileTest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,55 +33,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MonoGame.Framework, Version=3.5.1.1679, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="NVorbis, Version=0.8.4.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\NVorbis.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
-      <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\OpenTK.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adam.cs" />
-    <Compile Include="Beach.cs" />
-    <Compile Include="Grassbg.cs" />
-    <Compile Include="IslandTwentySeventeen.cs" />
-    <Compile Include="Palm.cs" />
-    <Compile Include="Peter.cs" />
-    <Compile Include="PeterAni.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="scene1.cs" />
-    <Compile Include="Scene2.cs" />
-    <Compile Include="sticky.cs" />
-    <Compile Include="TiledBeach.cs" />
-    <Compile Include="TiledChunkedIsland.cs" />
-    <Compile Include="TiledIsland.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MapLib\AnchorMapLib\AnchorMapLib\AnchorMapLib.csproj">
       <Project>{0D134E21-5234-4747-BFF5-D81929DB0788}</Project>
       <Name>AnchorMapLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MapLib\AnchorMapLib\AnchorMapLib\AnchorMapLib.csproj">
-      <Project>{0D134E21-5234-4747-BFF5-D81929DB0788}</Project>
-      <Name>AnchorMapLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Engine\Engine.csproj">
-      <Project>{12dcef20-7a4a-42ac-bfbc-0563ddbd47c7}</Project>
-      <Name>Engine</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

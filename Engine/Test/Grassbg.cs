@@ -1,5 +1,4 @@
-﻿using System;
-using Engine;
+﻿using Engine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -7,7 +6,7 @@ namespace Test
 {
     public class Grassbg  : Anchor
     {
-        private AncSprite Sprite;
+        private AncSprite _sprite;
 
         public Grassbg(string name)
         {
@@ -16,8 +15,8 @@ namespace Test
 
         public override void LoadContent()
         {
-            Sprite.Texture = SYSTEM.Content.Load<Texture2D>(Sprite.fileLocation);
-            AnchorSprite = Sprite;
+            _sprite.Texture = SystemRef.Content.Load<Texture2D>(_sprite.FileLocation);
+            AnchorSprite = _sprite;
         }
 
         public override void Update(GameTime gameTime)
@@ -27,24 +26,24 @@ namespace Test
         public override void Draw(GameTime gameTime)
         {
 
-            int x = 5000;
-            int y = 5000;
-            int width = Sprite.Texture.Width;
-            int height = Sprite.Texture.Height;
-            int columns = x / width + 1;
-            int rows = y / height + 1;
-            int cells = rows * columns;
-            int current = 0;
+            const int x = 5000;
+            const int y = 5000;
+            var width = _sprite.Texture.Width;
+            var height = _sprite.Texture.Height;
+            var columns = x / width + 1;
+            var rows = y / height + 1;
+            var cells = rows * columns;
+            var current = 0;
 
-            for (int i = 0; i < cells; i++)
+            for (var i = 0; i < cells; i++)
             {
-                int row = current / columns;
-                int column = current % columns;
+                var row = current / columns;
+                var column = current % columns;
 
-                int vecx = width * column;
-                int vecy = height * row;
+                var vecx = width * column;
+                var vecy = height * row;
 
-                SYSTEM.SpriteBatch.Draw(Sprite.Texture, new Vector2((float) vecx, (float) vecy), Color.White);
+                SystemRef.SpriteBatch.Draw(_sprite.Texture, new Vector2(vecx, vecy), Color.White);
                 current++;
             }
 
@@ -53,10 +52,9 @@ namespace Test
 
         public override void Instantiate(AncSystem sys, AncScene scene)
         {
-            SYSTEM = sys;
-            Sprite = new AncSprite(this);
-            Sprite.fileLocation = "grass";
-            AnchorSprite = Sprite;
+            SystemRef = sys;
+            _sprite = new AncSprite(this) {FileLocation = "grass"};
+            AnchorSprite = _sprite;
         }
     }
 }

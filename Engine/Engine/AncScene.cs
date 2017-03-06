@@ -7,14 +7,14 @@ namespace Engine
 {
     public abstract class AncScene : IDisposable
     {
-        public AncSystem SYSTEM;
-        public Dictionary<string, Anchor> objectList;
+        public AncSystem System;
+        public Dictionary<string, Anchor> ObjectList;
         public string Name;
         public GraphicsDevice GraphicsDevice { get; internal set; }
 
-        protected AncScene(string Name)
+        protected AncScene(string name)
         {
-            this.Name = Name;
+            Name = name;
         }
 
         public abstract void LoadContent();
@@ -22,14 +22,14 @@ namespace Engine
         public abstract void Draw(GameTime gameTime);
         public abstract void Instantiate(AncSystem sys);
 
-        public virtual void addObj(Anchor anc)
+        public virtual void AddObj(Anchor anc)
         {
-            objectList.Add(anc.Name, anc);
+            ObjectList.Add(anc.Name, anc);
         }
 
         public virtual void  Dispose()
         {
-            foreach (var obj in objectList.Values)
+            foreach (var obj in ObjectList.Values)
             {
                 obj.Dispose();
             }

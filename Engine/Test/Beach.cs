@@ -6,7 +6,7 @@ namespace Test
 {
 	public class Beach : Anchor
 	{
-		private AncSprite Sprite;
+		private AncSprite _sprite;
 
 		public Beach(string name)
 		{
@@ -15,8 +15,8 @@ namespace Test
 
 		public override void LoadContent()
 		{
-			Sprite.Texture = SYSTEM.Content.Load<Texture2D>(Sprite.fileLocation);
-			AnchorSprite = Sprite;
+			_sprite.Texture = SystemRef.Content.Load<Texture2D>(_sprite.FileLocation);
+			AnchorSprite = _sprite;
 		}
 
 		public override void Update(GameTime gameTime)
@@ -26,15 +26,14 @@ namespace Test
 
 		public override void Draw(GameTime gameTime)
 		{
-			SYSTEM.SpriteBatch.Draw(Sprite.Texture, new Vector2(0,0), Color.White);
+			SystemRef.SpriteBatch.Draw(_sprite.Texture, new Vector2(0,0), Color.White);
 		}
 
 		public override void Instantiate(AncSystem sys, AncScene scene)
 		{
-			SYSTEM = sys;
-			Sprite = new AncSprite(this);
-			Sprite.fileLocation = "beach";
-			AnchorSprite = Sprite;
+			SystemRef = sys;
+		    _sprite = new AncSprite(this) {FileLocation = "beach"};
+		    AnchorSprite = _sprite;
 		}
 	}
 }

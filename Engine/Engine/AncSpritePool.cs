@@ -1,39 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using OpenTK.Platform.Windows;
 
 namespace Engine
 {
 	public class AncSpritePool
 	{
-		Stack<AncSprite> Pool = new Stack<AncSprite>();
+	    private readonly Stack<AncSprite> _pool = new Stack<AncSprite>();
 
 		public void Add(AncSprite sprite)
 		{
-			Pool.Push(sprite);
+			_pool.Push(sprite);
 		}
 
 		public AncSprite  Rnd()
 		{
-			Random rnd = new Random();
+			var rnd = new Random();
 
-			int i = 0;
-			if (Pool.Count != 0)
-				i = Pool.Count;
+			var i = 0;
+			if (_pool.Count != 0)
+				i = _pool.Count;
 
-			int selected = rnd.Next(0, i);
+			var selected = rnd.Next(0, i);
 
-			AncSprite Returner = Pool.Peek();
-			for (int cnt = 0; cnt != selected; cnt++)
+			var returner = _pool.Peek();
+			for (var cnt = 0; cnt != selected; cnt++)
 			{
-				Returner = Pool.Pop();
+				returner = _pool.Pop();
 			}
-			return Returner;
+			return returner;
 		}
 
 		public AncSprite Get()
 		{
-			return Pool.Pop();
+			return _pool.Pop();
 		}
 
 

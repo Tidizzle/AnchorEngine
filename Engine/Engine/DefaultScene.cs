@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using Test;
 
 namespace Engine
 {
     public class DefaultScene : AncScene
     {
 
-        public DefaultScene(string Name) : base(Name)
+        public DefaultScene(string name) : base(name)
         {
-            base.Name = Name;
+            Name = name;
         }
 
         public override void LoadContent()
         {
-            foreach (var obj in objectList.Values)
+            foreach (var obj in ObjectList.Values)
             {
                 obj.LoadContent();
             }
@@ -25,7 +22,7 @@ namespace Engine
 
         public override void Update(GameTime gameTime)
         {
-            foreach (var obj in objectList.Values)
+            foreach (var obj in ObjectList.Values)
             {
                 obj.Update(gameTime);
             }
@@ -33,7 +30,7 @@ namespace Engine
 
         public override void Draw(GameTime gameTime)
         {
-            foreach (var obj in objectList.Values)
+            foreach (var obj in ObjectList.Values)
             {
                 obj.Draw(gameTime);
             }
@@ -41,10 +38,10 @@ namespace Engine
 
         public override void Instantiate(AncSystem sys)
         {
-            objectList = new Dictionary<string, Anchor>();
+            ObjectList = new Dictionary<string, Anchor>();
             var bg = new RedBackground("Red");
             bg.Instantiate(sys, this);
-            objectList.Add(bg.Name, bg);
+            ObjectList.Add(bg.Name, bg);
         }
     }
 }

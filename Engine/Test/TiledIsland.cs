@@ -12,91 +12,86 @@ namespace Test
 	public class TiledIsland : Anchor
 	{
 		//Map chunks
-		private readonly List<string> ChunkList = new List<string>();
+		private readonly List<string> _chunkList = new List<string>();
 
-		private MapData CurrentMap;
+		private MapData _currentMap;
 
-		private readonly List<List<TileInfo>> Tiles = new List<List<TileInfo>>();
+		private readonly List<List<TileInfo>> _tiles = new List<List<TileInfo>>();
 
-		private readonly List<TileInfo> DeepWater = new List<TileInfo>();
-		private readonly List<TileInfo> ShallowWater = new List<TileInfo>();
-		private readonly List<TileInfo> WetSand = new List<TileInfo>();
-		private readonly List<TileInfo> DrySand = new List<TileInfo>();
-		private readonly List<TileInfo> Grass = new List<TileInfo>();
+		private readonly List<TileInfo> _deepWater = new List<TileInfo>();
+		private readonly List<TileInfo> _shallowWater = new List<TileInfo>();
+		private readonly List<TileInfo> _wetSand = new List<TileInfo>();
+		private readonly List<TileInfo> _drySand = new List<TileInfo>();
+		private readonly List<TileInfo> _grass = new List<TileInfo>();
 
 		//Tiles
-		private AncSprite DeepwaterTile;
-		private AncSprite ShallowWaterTile;
-		private AncSprite WetSandTile;
-		private AncSprite DrySandTile;
-		private AncSprite LongGrass;
-		private AncSprite ShortGrass;
+		private AncSprite _deepwaterTile;
+		private AncSprite _shallowWaterTile;
+		private AncSprite _wetSandTile;
+		private AncSprite _drySandTile;
+		private AncSprite _longGrass;
+		private AncSprite _shortGrass;
 
-		private AncSprite ErrorTile;
+		private AncSprite _errorTile;
 
 		//Reference
-		private Anchor RefToFoucs;
 
-		public TiledIsland(string Name, Anchor focus)
+	    public TiledIsland(string name)
 		{
-			this.Name = Name;
-			RefToFoucs = focus;
+			Name = name;
 		}
 
 		public override void LoadContent()
 		{
 			var ser = new JavaScriptSerializer();
 
-			foreach (var chunk in ChunkList)
+			foreach (var chunk in _chunkList)
 			{
-				CurrentMap = ser.Deserialize<MapData>(chunk);
+				_currentMap = ser.Deserialize<MapData>(chunk);
 
-				foreach (var position in CurrentMap.Data)
-					switch (position.ID)
+				foreach (var position in _currentMap.Data)
+					switch (position.Id)
 					{
 						case 0:
-							DrySand.Add(position);
+							_drySand.Add(position);
 							break;
 						case 1:
-							WetSand.Add(position);
+							_wetSand.Add(position);
 							break;
 						case 2:
-							ShallowWater.Add(position);
+							_shallowWater.Add(position);
 							break;
 						case 3:
-							DeepWater.Add(position);
+							_deepWater.Add(position);
 							break;
 						case 4:
-							Grass.Add(position);
+							_grass.Add(position);
 							break;
 					}
 			}
 
-			DeepwaterTile.Texture = SYSTEM.Content.Load<Texture2D>(DeepwaterTile.fileLocation);
-			ShallowWaterTile.Texture = SYSTEM.Content.Load<Texture2D>(ShallowWaterTile.fileLocation);
-			WetSandTile.Texture = SYSTEM.Content.Load<Texture2D>(WetSandTile.fileLocation);
-			DrySandTile.Texture = SYSTEM.Content.Load<Texture2D>(DrySandTile.fileLocation);
-			LongGrass.Texture = SYSTEM.Content.Load<Texture2D>(LongGrass.fileLocation);
-			ShortGrass.Texture = SYSTEM.Content.Load<Texture2D>(ShortGrass.fileLocation);
-			ErrorTile.Texture = SYSTEM.Content.Load<Texture2D>(ErrorTile.fileLocation);
+			_deepwaterTile.Texture = SystemRef.Content.Load<Texture2D>(_deepwaterTile.FileLocation);
+			_shallowWaterTile.Texture = SystemRef.Content.Load<Texture2D>(_shallowWaterTile.FileLocation);
+			_wetSandTile.Texture = SystemRef.Content.Load<Texture2D>(_wetSandTile.FileLocation);
+			_drySandTile.Texture = SystemRef.Content.Load<Texture2D>(_drySandTile.FileLocation);
+			_longGrass.Texture = SystemRef.Content.Load<Texture2D>(_longGrass.FileLocation);
+			_shortGrass.Texture = SystemRef.Content.Load<Texture2D>(_shortGrass.FileLocation);
+			_errorTile.Texture = SystemRef.Content.Load<Texture2D>(_errorTile.FileLocation);
 
-			var GrassPool = new VariantPool();
-			GrassPool.Add(LongGrass, ShortGrass);
+			var grassPool = new VariantPool();
+			grassPool.Add(_longGrass, _shortGrass);
 
-			foreach (var grass in Grass)
+			foreach (var grass in _grass)
 			{
-				var rnd = new Random();
-				if (rnd.Next(0, 1000) <= 499)
-					grass.ID = 40;
-				else
-					grass.ID = 41;
+			    var rnd = new Random();
+			    grass.Id = rnd.Next(0, 1000) <= 499 ? 40 : 41;
 			}
 
-			Tiles.Add(DrySand);
-			Tiles.Add(DeepWater);
-			Tiles.Add(ShallowWater);
-			Tiles.Add(WetSand);
-			Tiles.Add(Grass);
+			_tiles.Add(_drySand);
+			_tiles.Add(_deepWater);
+			_tiles.Add(_shallowWater);
+			_tiles.Add(_wetSand);
+			_tiles.Add(_grass);
 		}
 
 		public override void Update(GameTime gameTime)
@@ -105,45 +100,45 @@ namespace Test
 
 		public override void Draw(GameTime gameTime)
 		{
-			var tile = DeepwaterTile;
+			AncSprite tile;
 
-			foreach (var Tile in Tiles)
+			foreach (var Tile in _tiles)
 			foreach (var position in Tile)
-				switch (position.ID)
+				switch (position.Id)
 				{
 					case 0:
-						tile = DrySandTile;
-						SYSTEM.SpriteBatch.Draw(tile.Texture,
+						tile = _drySandTile;
+						SystemRef.SpriteBatch.Draw(tile.Texture,
 							new Vector2(position.X * tile.Texture.Width, position.Y * tile.Texture.Height), Color.White);
 						break;
 					case 1:
-						tile = WetSandTile;
-						SYSTEM.SpriteBatch.Draw(tile.Texture,
+						tile = _wetSandTile;
+						SystemRef.SpriteBatch.Draw(tile.Texture,
 							new Vector2(position.X * tile.Texture.Width, position.Y * tile.Texture.Height), Color.White);
 						break;
 					case 2:
-						tile = ShallowWaterTile;
-						SYSTEM.SpriteBatch.Draw(tile.Texture,
+						tile = _shallowWaterTile;
+						SystemRef.SpriteBatch.Draw(tile.Texture,
 							new Vector2(position.X * tile.Texture.Width, position.Y * tile.Texture.Height), Color.White);
 						break;
 					case 3:
-						tile = DeepwaterTile;
-						SYSTEM.SpriteBatch.Draw(tile.Texture,
+						tile = _deepwaterTile;
+						SystemRef.SpriteBatch.Draw(tile.Texture,
 							new Vector2(position.X * tile.Texture.Width, position.Y * tile.Texture.Height), Color.White);
 						break;
 					case 40:
-						tile = ShortGrass;
-						SYSTEM.SpriteBatch.Draw(tile.Texture,
+						tile = _shortGrass;
+						SystemRef.SpriteBatch.Draw(tile.Texture,
 							new Vector2(position.X * tile.Texture.Width, position.Y * tile.Texture.Height), Color.White);
 						break;
 					case 41:
-						tile = LongGrass;
-						SYSTEM.SpriteBatch.Draw(tile.Texture,
+						tile = _longGrass;
+						SystemRef.SpriteBatch.Draw(tile.Texture,
 							new Vector2(position.X * tile.Texture.Width, position.Y * tile.Texture.Height), Color.White);
 						break;
 					default:
-						SYSTEM.SpriteBatch.Draw(ErrorTile.Texture,
-							new Vector2(position.X * ErrorTile.Texture.Width, position.Y * ErrorTile.Texture.Height), Color.White);
+						SystemRef.SpriteBatch.Draw(_errorTile.Texture,
+							new Vector2(position.X * _errorTile.Texture.Width, position.Y * _errorTile.Texture.Height), Color.White);
 						break;
 				}
 
@@ -155,35 +150,28 @@ namespace Test
 
 		public override void Instantiate(AncSystem sys, AncScene scene)
 		{
-			SYSTEM = sys;
+			SystemRef = sys;
 			Parent = scene;
 
-			ChunkList.Add(File.ReadAllText("TL.json"));
-			ChunkList.Add(File.ReadAllText("TR.json"));
-			ChunkList.Add(File.ReadAllText("BL.json"));
-			ChunkList.Add(File.ReadAllText("BR.json"));
+			_chunkList.Add(File.ReadAllText("TL.json"));
+			_chunkList.Add(File.ReadAllText("TR.json"));
+			_chunkList.Add(File.ReadAllText("BL.json"));
+			_chunkList.Add(File.ReadAllText("BR.json"));
 
 
-			DrySandTile = new AncSprite(this);
-			DrySandTile.fileLocation = "Sand";
+		    _drySandTile = new AncSprite(this) {FileLocation = "Sand"};
 
-			WetSandTile = new AncSprite(this);
-			WetSandTile.fileLocation = "WetSand";
+		    _wetSandTile = new AncSprite(this) {FileLocation = "WetSand"};
 
-			DeepwaterTile = new AncSprite(this);
-			DeepwaterTile.fileLocation = "DeepWater";
+		    _deepwaterTile = new AncSprite(this) {FileLocation = "DeepWater"};
 
-			ShallowWaterTile = new AncSprite(this);
-			ShallowWaterTile.fileLocation = "ShallowWater";
+		    _shallowWaterTile = new AncSprite(this) {FileLocation = "ShallowWater"};
 
-			ShortGrass = new AncSprite(this);
-			ShortGrass.fileLocation = "ShortGrass";
+		    _shortGrass = new AncSprite(this) {FileLocation = "ShortGrass"};
 
-			LongGrass = new AncSprite(this);
-			LongGrass.fileLocation = "LongGrass";
+		    _longGrass = new AncSprite(this) {FileLocation = "LongGrass"};
 
-			ErrorTile = new AncSprite(this);
-			ErrorTile.fileLocation = "Error";
+		    _errorTile = new AncSprite(this) {FileLocation = "Error"};
 		}
 	}
 }

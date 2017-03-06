@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace Engine
 {
@@ -28,7 +27,7 @@ namespace Engine
 
 		public AncSprite GetRnd()
 		{
-			Random rnd = new Random();
+			var rnd = new Random();
 			return Pool[rnd.Next(0, Pool.Count)];
 		}
 

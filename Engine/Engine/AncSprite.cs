@@ -1,6 +1,6 @@
 ﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using OpenTK;
 
 namespace Engine
  {
@@ -8,13 +8,13 @@ namespace Engine
      {
          public AncSprite(Anchor parent)
          {
-             this.parent = parent;
+             Parent = parent;
          }
 
-         public Anchor parent;
+         public Anchor Parent;
          public Texture2D Texture;
-         public string fileLocation = "";
-         public Vector2 currentLoc;
+         public string FileLocation = "";
+         public Vector2 CurrentLoc;
 
          public void Dispose()
          {

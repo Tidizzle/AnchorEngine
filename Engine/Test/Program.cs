@@ -8,7 +8,7 @@ namespace Test
         {
             using (var t = new AncApplication(1500, 900, false, false))
             {
-                t.Start(new scene1("Scene1"), new DefaultScene("Default"));
+                t.Start(new Scene1("Scene1"), new DefaultScene("Default"));
             }
         }
     }

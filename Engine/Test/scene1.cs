@@ -1,23 +1,20 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
 using Engine;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics.PackedVector;
 
 namespace Test
 {
-    public class scene1 : AncScene
+    public class Scene1 : AncScene
     {
 
-        public scene1(string Name) : base(Name)
+        public Scene1(string name) : base(name)
         {
-            base.Name = Name;
+            Name = name;
         }
 
         public override void LoadContent()
         {
-            foreach (var obj in objectList.Values)
+            foreach (var obj in ObjectList.Values)
             {
                 obj.LoadContent();
             }
@@ -25,7 +22,7 @@ namespace Test
 
         public override void Update(GameTime gameTime)
         {
-            foreach (var obj in objectList.Values)
+            foreach (var obj in ObjectList.Values)
             {
                 obj.Update(gameTime);
             }
@@ -33,7 +30,7 @@ namespace Test
 
         public override void Draw(GameTime gameTime)
         {
-            foreach (var obj in objectList.Values)
+            foreach (var obj in ObjectList.Values)
             {
                 obj.Draw(gameTime);
             }
@@ -41,29 +38,32 @@ namespace Test
 
         public override void Instantiate(AncSystem sys)
         {
-            SYSTEM = sys;
-            objectList = new Dictionary<string, Anchor>();
+            System = sys;
+            ObjectList = new Dictionary<string, Anchor>();
 
             //var peter = new PeterAni("Peter");
             //peter.Instantiate(sys, this);
 
-	        var adam = new Adam("Adam");
+	        var adam = new Adam("AdamSheetCorners");
 	        adam.Instantiate(sys, this);
 
-	        var bg = new TiledIsland("Island", adam);
+
+            var palm = new Palm("Palm");
+            palm.Instantiate(sys, this);
+
+	        var bg = new IslandTwentySeventeen("Island", adam, palm);
 	        bg.Instantiate(sys, this);
 
-	        var camera = new Engine.Camera(sys.GraphicsDevice, "Camera", adam);
+	        var camera = new Camera(sys.GraphicsDevice, "Camera", adam);
            camera.Instantiate(sys, this);
 
-	        var Palm = new Palm("Palm");
-	        Palm.Instantiate(sys, this);
 
-	        addObj(bg);
-	        addObj(Palm);
-	        addObj(adam);
+
+	        AddObj(bg);
+	        AddObj(palm);
+	        AddObj(adam);
 	        //addObj(peter);
-	        addObj(camera);
+	        AddObj(camera);
 
 	        //var peter = new Peter("Peter");
             //peter.Instantiate(sys);
