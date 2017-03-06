@@ -2,7 +2,7 @@
 using Engine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using AnchorMapLib;
+using TidalLibrary;
 using System.Web.Script.Serialization;
 
 namespace Test
@@ -58,28 +58,28 @@ namespace Test
 				{
 					case 0:
 						_pos = new Vector2(position.X * _sandTile.Texture.Width, position.Y * _sandTile.Texture.Height);
-						SystemRef.SpriteBatch.Draw(_sandTile.Texture, _pos, Color.White);
+						SystemRef.SpriteBatch.Draw(_sandTile.Texture, _pos, Microsoft.Xna.Framework.Color.White);
 						break;
 					case 1:
 						_pos = new Vector2(position.X * _wetSandTile.Texture.Width, position.Y * _wetSandTile.Texture.Height);
-						SystemRef.SpriteBatch.Draw(_wetSandTile.Texture, _pos, Color.White);
+						SystemRef.SpriteBatch.Draw(_wetSandTile.Texture, _pos, Microsoft.Xna.Framework.Color.White);
 						break;
 					case 2:
 						_pos = new Vector2(position.X * _waterTile.Texture.Width, position.Y * _waterTile.Texture.Height);
-						SystemRef.SpriteBatch.Draw(_waterTile.Texture, _pos, Color.White);
+						SystemRef.SpriteBatch.Draw(_waterTile.Texture, _pos, Microsoft.Xna.Framework.Color.White);
 						break;
 					case 3:
 						_pos = new Vector2(position.X * _deepWaterTile.Texture.Width, position.Y * _deepWaterTile.Texture.Height);
-						SystemRef.SpriteBatch.Draw(_deepWaterTile.Texture, _pos, Color.White);
+						SystemRef.SpriteBatch.Draw(_deepWaterTile.Texture, _pos, Microsoft.Xna.Framework.Color.White);
 						break;
 					case 4:
 						_pos = new Vector2(position.X * _grassTile.Texture.Width,
 							position.Y *  _grassTile.Texture.Height);
-						SystemRef.SpriteBatch.Draw(_grassTile.Texture, _pos, Color.White);
+						SystemRef.SpriteBatch.Draw(_grassTile.Texture, _pos, Microsoft.Xna.Framework.Color.White);
 						break;
 					default:
 						_pos = new Vector2(position.X * _errorTile.Texture.Width, position.Y * _errorTile.Texture.Height);
-						SystemRef.SpriteBatch.Draw(_errorTile.Texture, _pos, Color.White);
+						SystemRef.SpriteBatch.Draw(_errorTile.Texture, _pos, Microsoft.Xna.Framework.Color.White);
 						break;
 				}
 

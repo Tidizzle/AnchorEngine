@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Web.Script.Serialization;
-using AnchorMapLib;
+using TidalLibrary;
 using Engine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -109,36 +109,36 @@ namespace Test
 					case 0:
 						tile = _drySandTile;
 						SystemRef.SpriteBatch.Draw(tile.Texture,
-							new Vector2(position.X * tile.Texture.Width, position.Y * tile.Texture.Height), Color.White);
+							new Vector2(position.X * tile.Texture.Width, position.Y * tile.Texture.Height), Microsoft.Xna.Framework.Color.White);
 						break;
 					case 1:
 						tile = _wetSandTile;
 						SystemRef.SpriteBatch.Draw(tile.Texture,
-							new Vector2(position.X * tile.Texture.Width, position.Y * tile.Texture.Height), Color.White);
+							new Vector2(position.X * tile.Texture.Width, position.Y * tile.Texture.Height), Microsoft.Xna.Framework.Color.White);
 						break;
 					case 2:
 						tile = _shallowWaterTile;
 						SystemRef.SpriteBatch.Draw(tile.Texture,
-							new Vector2(position.X * tile.Texture.Width, position.Y * tile.Texture.Height), Color.White);
+							new Vector2(position.X * tile.Texture.Width, position.Y * tile.Texture.Height),Microsoft.Xna.Framework.Color.White);
 						break;
 					case 3:
 						tile = _deepwaterTile;
 						SystemRef.SpriteBatch.Draw(tile.Texture,
-							new Vector2(position.X * tile.Texture.Width, position.Y * tile.Texture.Height), Color.White);
+							new Vector2(position.X * tile.Texture.Width, position.Y * tile.Texture.Height), Microsoft.Xna.Framework.Color.White);
 						break;
 					case 40:
 						tile = _shortGrass;
 						SystemRef.SpriteBatch.Draw(tile.Texture,
-							new Vector2(position.X * tile.Texture.Width, position.Y * tile.Texture.Height), Color.White);
+							new Vector2(position.X * tile.Texture.Width, position.Y * tile.Texture.Height), Microsoft.Xna.Framework.Color.White);
 						break;
 					case 41:
 						tile = _longGrass;
 						SystemRef.SpriteBatch.Draw(tile.Texture,
-							new Vector2(position.X * tile.Texture.Width, position.Y * tile.Texture.Height), Color.White);
+							new Vector2(position.X * tile.Texture.Width, position.Y * tile.Texture.Height), Microsoft.Xna.Framework.Color.White);
 						break;
 					default:
 						SystemRef.SpriteBatch.Draw(_errorTile.Texture,
-							new Vector2(position.X * _errorTile.Texture.Width, position.Y * _errorTile.Texture.Height), Color.White);
+							new Vector2(position.X * _errorTile.Texture.Width, position.Y * _errorTile.Texture.Height), Microsoft.Xna.Framework.Color.White);
 						break;
 				}
 

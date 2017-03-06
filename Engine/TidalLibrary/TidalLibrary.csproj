@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{12DCEF20-7A4A-42AC-BFBC-0563DDBD47C7}</ProjectGuid>
+    <ProjectGuid>{5FFAA8E1-ED5A-4754-B4C7-6AE3C0CC3A62}</ProjectGuid>
     <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Engine</RootNamespace>
-    <AssemblyName>Engine</AssemblyName>
+    <RootNamespace>TidalLibrary</RootNamespace>
+    <AssemblyName>TidalLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,49 +33,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MonoGame.Framework, Version=3.5.1.1679, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="NVorbis, Version=0.8.4.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\NVorbis.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
-      <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.5.1.1679\lib\net40\OpenTK.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AncAnimatedSprite.cs" />
-    <Compile Include="AncApplication.cs" />
-    <Compile Include="Anchor.cs" />
-    <Compile Include="AncInput.cs" />
-    <Compile Include="AncScene.cs" />
-    <Compile Include="AncSceneController.cs" />
-    <Compile Include="AncSprite.cs" />
-    <Compile Include="AncSpritePool.cs" />
-    <Compile Include="AncSystem.cs" />
-    <Compile Include="Camera.cs" />
-    <Compile Include="DefaultScene.cs" />
-    <Compile Include="Map.cs" />
-    <Compile Include="ObjectData.cs" />
-    <Compile Include="ObjectMap.cs" />
-    <Compile Include="ObjectPlacer.cs" />
+    <Compile Include="Color.cs" />
+    <Compile Include="MapData.cs" />
+    <Compile Include="Palette.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RedBackground.cs" />
-    <Compile Include="Utility.cs" />
-    <Compile Include="VariantPool.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TidalLibrary\TidalLibrary.csproj">
-      <Project>{5FFAA8E1-ED5A-4754-B4C7-6AE3C0CC3A62}</Project>
-      <Name>TidalLibrary</Name>
-    </ProjectReference>
+    <Compile Include="TileInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

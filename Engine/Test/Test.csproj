@@ -71,17 +71,13 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MapLib\AnchorMapLib\AnchorMapLib\AnchorMapLib.csproj">
-      <Project>{0D134E21-5234-4747-BFF5-D81929DB0788}</Project>
-      <Name>AnchorMapLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MapLib\AnchorMapLib\AnchorMapLib\AnchorMapLib.csproj">
-      <Project>{0D134E21-5234-4747-BFF5-D81929DB0788}</Project>
-      <Name>AnchorMapLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Engine\Engine.csproj">
       <Project>{12dcef20-7a4a-42ac-bfbc-0563ddbd47c7}</Project>
       <Name>Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TidalLibrary\TidalLibrary.csproj">
+      <Project>{5FFAA8E1-ED5A-4754-B4C7-6AE3C0CC3A62}</Project>
+      <Name>TidalLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

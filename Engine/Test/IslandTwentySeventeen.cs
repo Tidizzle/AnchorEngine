@@ -4,7 +4,7 @@ using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Permissions;
 using System.Web.Script.Serialization;
-using AnchorMapLib;
+using TidalLibrary;
 using Engine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -199,7 +199,7 @@ namespace Test
                     lasty = -6400;
 
                 if(Vector2.Distance(new Vector2(lastx,lasty), _refToFocus.Location) <= 2500)
-                    SystemRef.SpriteBatch.Draw(_deepWaterTile.Texture, new Vector2(lastx, lasty), Color.White);
+                    SystemRef.SpriteBatch.Draw(_deepWaterTile.Texture, new Vector2(lastx, lasty), Microsoft.Xna.Framework.Color.White);
 
                 lastx += 64;
             }
@@ -243,7 +243,7 @@ namespace Test
                     var y = position.Y * tile.Texture.Height + (position.Ymodifier / (tile.Texture.Width /2)) * tile.Texture.Height;
 
                     if(Vector2.Distance(new Vector2(x,y), _refToFocus.Location) <= 2500)
-                        SystemRef.SpriteBatch.Draw(tile.Texture, new Vector2(x,y), scale: new Vector2(1f), color: Color.White, layerDepth: 0.001f );
+                        SystemRef.SpriteBatch.Draw(tile.Texture, new Vector2(x,y), scale: new Vector2(1f), color: Microsoft.Xna.Framework.Color.White, layerDepth: 0.001f );
 
                 }
             }
