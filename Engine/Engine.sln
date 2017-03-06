@@ -9,9 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileTest", "FileTest\FileTest.csproj", "{C8619C79-92E1-4AB0-AD4D-B83BBCA06438}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnchorMapParser", "..\Mapper\AnchorMapParser\AnchorMapParser\AnchorMapParser.csproj", "{5FAFB0BD-F7D1-48E6-884B-CD427A6FDB02}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnchorMapParser", "..\..\Mapper\AnchorMapParser\AnchorMapParser\AnchorMapParser.csproj", "{5FAFB0BD-F7D1-48E6-884B-CD427A6FDB02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnchorMapLib", "..\MapLib\AnchorMapLib\AnchorMapLib\AnchorMapLib.csproj", "{0D134E21-5234-4747-BFF5-D81929DB0788}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnchorMapLib", "..\..\MapLib\AnchorMapLib\AnchorMapLib\AnchorMapLib.csproj", "{0D134E21-5234-4747-BFF5-D81929DB0788}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TidalLibrary", "TidalLibrary\TidalLibrary.csproj", "{5FFAA8E1-ED5A-4754-B4C7-6AE3C0CC3A62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{0D134E21-5234-4747-BFF5-D81929DB0788}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D134E21-5234-4747-BFF5-D81929DB0788}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D134E21-5234-4747-BFF5-D81929DB0788}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FFAA8E1-ED5A-4754-B4C7-6AE3C0CC3A62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FFAA8E1-ED5A-4754-B4C7-6AE3C0CC3A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FFAA8E1-ED5A-4754-B4C7-6AE3C0CC3A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FFAA8E1-ED5A-4754-B4C7-6AE3C0CC3A62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
